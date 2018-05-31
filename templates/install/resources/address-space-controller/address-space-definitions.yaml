@@ -84,7 +84,7 @@ data:
           authServicePlugin {
             name: auth_service
             authService: ${AUTHENTICATION_SERVICE_HOST}:${AUTHENTICATION_SERVICE_PORT}
-            #saslInitHostname: ${AUTHENTICATION_SERVICE_SASL_INIT_HOST}
+            saslInitHostname: ${AUTHENTICATION_SERVICE_SASL_INIT_HOST}
             authSslProfile: auth_service_ssl
           }
 
@@ -1180,7 +1180,7 @@ data:
           authServicePlugin {
             name: auth_service
             authService: ${AUTHENTICATION_SERVICE_HOST}:${AUTHENTICATION_SERVICE_PORT}
-            #saslInitHostname: ${AUTHENTICATION_SERVICE_SASL_INIT_HOST}
+            saslInitHostname: ${AUTHENTICATION_SERVICE_SASL_INIT_HOST}
             authSslProfile: auth_service_ssl
           }
 
@@ -1733,10 +1733,6 @@ data:
                     - mountPath: /etc/prometheus-config
                       name: broker-prometheus-config
                       readOnly: true
-                    - mountPath: /etc/qpid-dispatch/config
-                      name: qdrouterd-config
-                    - mountPath: /etc/qpid-dispatch/additional-config
-                      name: colocated-config
                   volumes:
                   - name: ssl-certs
                     secret:
@@ -1750,12 +1746,6 @@ data:
                   - configMap:
                       name: broker-prometheus-config
                     name: broker-prometheus-config
-                  - name: qdrouterd-config
-                    configMap:
-                      name: qdrouterd-config
-                  - name: colocated-config
-                    configMap:
-                      name: ${NAME}-config
               volumeClaimTemplates:
               - apiVersion: v1
                 kind: PersistentVolumeClaim
